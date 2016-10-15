@@ -20,7 +20,7 @@ public enum FaceRank {
 		this.rank = r;
 	}
 
-	int getRank() {
+	public int getRank() {
 		return this.rank;
 	}
 

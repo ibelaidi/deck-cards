@@ -3,9 +3,10 @@
  */
 package gb.ilias.ubs.deck.cards.game;
 
-import java.util.ArrayList;
-import java.util.List;
+import gb.ilias.ubs.deck.cards.game.internal.FaceRank;
+import gb.ilias.ubs.deck.cards.game.internal.Suit;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -17,35 +18,81 @@ import org.junit.Test;
 public class GameTester {
 
 	@Test
-	public void gameTest() {
-
-		final List<Card> hand = new ArrayList<Card>();
-		final Card card;
-		final ArrayList<Card> deckOfCards = new ArrayList<Card>();
-		final Deck deckTester;
-
+	public void gameHEARTSTest() {
 		// Suits
-		final String hearts = "Hearts";
-		final String clubs = "Clubs";
-		final String spades = "Spades";
-		final String diamonds = "Diamonds";
+		final Suit hearts = Suit.HEARTS;
+		final Suit clubs = Suit.CLUBS;
+		final Suit spades = Suit.SPADES;
+		final Suit diamonds = Suit.DIAMONDS;
 		// Ranks
-		final String queen = "Queen";
-		final String king = "King";
-		final String jack = "Jack";
-		final String ace = "Ace";
+		final FaceRank queen = FaceRank.Queen;
+		final FaceRank king = FaceRank.King;
+		final FaceRank jack = FaceRank.Jack;
+		final FaceRank ace = FaceRank.Ace;
 		// Possible Suits
-		final String[] suits = { hearts, hearts, hearts, hearts, hearts, clubs, clubs, clubs, clubs, clubs,
-				hearts, clubs, diamonds, spades, hearts, hearts, diamonds, clubs, hearts, diamonds, diamonds,
-				diamonds, diamonds, diamonds, diamonds, hearts, diamonds, spades, clubs, clubs, spades,
-				hearts, clubs, diamonds, clubs, diamonds, hearts, diamonds, hearts, hearts, hearts, diamonds,
-				diamonds, clubs, spades, hearts, clubs, diamonds, clubs, spades };
+		final Suit[] suits = { hearts, spades, clubs, diamonds };
 		// Possible Ranks
-		final String[] ranks = { ace, "10", jack, queen, king, "2", "3", "4", "5", "6", "9", "9", "9", "9",
-				"4", queen, queen, queen, "5", "5", "4", "6", "8", "2", "9", "4", "5", "6", "7", "8", "4",
-				"4", "4", "7", "6", "5", "5", jack, jack, king, jack, jack, "4", "6", "8", jack, "4", "9",
-				"8", "6" };
-
+		final FaceRank[] ranks = { ace, FaceRank.Ten, jack, queen, king, FaceRank.Deuce, FaceRank.Three,
+				FaceRank.Four, FaceRank.Five, FaceRank.Six, FaceRank.Nine, FaceRank.Nine, FaceRank.Nine };
 		//
+		final Deck deck = new Deck(false, suits, ranks);
+		final Card cardHearts = deck.dealCard();
+		//
+		Assert.assertTrue("Expecting Hearts: ", cardHearts.getSuit().equals(Suit.HEARTS));
+	}
+
+	@Test
+	public void gameSPADESTest() {
+		// Suits
+		final Suit hearts = Suit.HEARTS;
+		final Suit clubs = Suit.CLUBS;
+		final Suit spades = Suit.SPADES;
+		final Suit diamonds = Suit.DIAMONDS;
+		// Ranks
+		final FaceRank queen = FaceRank.Queen;
+		final FaceRank king = FaceRank.King;
+		final FaceRank jack = FaceRank.Jack;
+		final FaceRank ace = FaceRank.Ace;
+		// Possible Suits
+		final Suit[] suits = { spades, hearts, clubs, diamonds };
+		// Possible Ranks
+		final FaceRank[] ranks = { ace, FaceRank.Ten, jack, queen, king, FaceRank.Deuce, FaceRank.Three,
+				FaceRank.Four, FaceRank.Five, FaceRank.Six, FaceRank.Nine, FaceRank.Nine, FaceRank.Nine };
+		//
+		final Deck deck = new Deck(false, suits, ranks);
+		final Card cardSpades = deck.dealCard();
+		//
+		Assert.assertTrue("Expecting Spades: ", cardSpades.getSuit().equals(Suit.SPADES));
+	}
+
+	@Test
+	public void gameMultiTest() {
+		// Suits
+		final Suit hearts = Suit.HEARTS;
+		final Suit clubs = Suit.CLUBS;
+		final Suit spades = Suit.SPADES;
+		final Suit diamonds = Suit.DIAMONDS;
+		// Ranks
+		final FaceRank queen = FaceRank.Queen;
+		final FaceRank king = FaceRank.King;
+		final FaceRank jack = FaceRank.Jack;
+		final FaceRank ace = FaceRank.Ace;
+		// Possible Suits
+		final Suit[] suits = { diamonds, hearts, clubs, spades };
+		// Possible Ranks
+		final FaceRank[] ranks = { ace, FaceRank.Ten, jack, queen, king, FaceRank.Deuce, FaceRank.Three,
+				FaceRank.Four, FaceRank.Five, FaceRank.Six, FaceRank.Nine, FaceRank.Nine, FaceRank.Nine };
+		//
+		final Deck deck = new Deck(false, suits, ranks);
+		final Card card1 = deck.dealCard();
+		//
+		deck.shuffle();
+		final Card card2 = deck.dealCard();
+		//
+		deck.shuffle();
+		final Card card3 = deck.dealCard();
+		//
+		Assert.assertFalse("Expecting Different Cards: ", card1.getSuit().equals(card2.getSuit()));
+		Assert.assertFalse("Expecting Different Cards: ", card1.getSuit().equals(card3.getSuit()));
 	}
 }

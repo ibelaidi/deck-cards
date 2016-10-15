@@ -70,7 +70,7 @@
 					</systemPropertyVariables>
 					<forkCount>1C</forkCount>
 					<reuseForks>${reuseForks}</reuseForks>
-					<argLine>-Xmx512m -XX:MaxPermSize=512m</argLine>
+					<argLine>-Xmx512m -XX:MaxPermSize=128m</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -115,9 +115,8 @@
 							<!-- Optional Start -->
 							<finalName>CardGame</finalName>
 							<shadedArtifactAttached>true</shadedArtifactAttached>
-							<shadedClassifierName>-UBS</shadedClassifierName>
+							<shadedClassifierName>UBS</shadedClassifierName>
 							<!-- Optional End -->
-
 							<transformers>
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">

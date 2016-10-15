@@ -3,6 +3,7 @@
  */
 package gb.ilias.ubs.deck.cards.game;
 
+import gb.ilias.ubs.deck.cards.game.internal.FaceRank;
 import gb.ilias.ubs.deck.cards.game.internal.Suit;
 
 /**
@@ -55,6 +56,37 @@ public class Deck {
 		for (int suit = 0; suit <= 3; suit++) {
 			for (int value = 1; value <= 13; value++) {
 				this.deck[cardCt] = new Card(value, Suit.getSuit(suit));
+				cardCt++;
+			}
+		}
+		if (includeJokers) {
+			this.deck[52] = new Card(1, Suit.JOKER);
+			this.deck[53] = new Card(2, Suit.JOKER);
+		}
+		this.cardsUsed = 0;
+	}
+
+	/**
+	 * Constructs a poker deck of playing cards, The deck contains
+	 * the usual 52 cards and can optionally contain two Jokers
+	 * in addition, for a total of 54 cards. Initially the cards
+	 * are in a sorted order. The shuffle() method can be called to
+	 * randomize the order.
+	 *
+	 * @param includeJokers
+	 *            if true, two Jokers are included in the deck; if false,
+	 *            there are no Jokers in the deck.
+	 */
+	public Deck(boolean includeJokers, Suit[] suits, FaceRank[] faceRanks) {
+		if (includeJokers) {
+			this.deck = new Card[54];
+		} else {
+			this.deck = new Card[52];
+		}
+		int cardCt = 0;
+		for (final Suit suit : suits) {
+			for (final FaceRank fRank : faceRanks) {
+				this.deck[cardCt] = new Card(fRank.getRank(), suit);
 				cardCt++;
 			}
 		}
